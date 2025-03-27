@@ -1,0 +1,18 @@
+assemble:
+    - from: build/css
+      hashify: bootstrap.css
+      into: static/css
+    - from: build/fonts
+      into: static/fonts    
+    - from: build/webfonts
+      into: static/webfonts          
+glyphicon-global-css:
+    name: Glyphicon Global CSS
+    scope: company
+    type: globalCSS
+    url: css/bootstrap.*.css
+fontawesome-global-css:
+    name: Fontawesome Global CSS
+    scope: company
+    type: globalCSS
+    url: css/fontawesome.*.css
