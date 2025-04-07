@@ -53,12 +53,11 @@ fs.copyFile(inputCSSPath, outputCSSPath, (err) => {
 
 /* Fontawesome */
 
-const faInputFontPath = path.resolve(projectRoot, "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2");
-const faOutputFontPath = path.resolve(__dirname, "build/webfonts/fa-regular-400.woff2");
+const faInputFontPath = path.resolve(__dirname, "assets/font-awesome-3.2.1/fontawesome-webfont.woff");
+const faOutputFontPath = path.resolve(__dirname, "build/font/fontawesome-webfont.woff");
 
-const faInputCSSPath = path.resolve(projectRoot, "node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css");
-const faFontFaceInputCSSPath = path.resolve(projectRoot, "node_modules/@fortawesome/fontawesome-free/css/regular.min.css");
-const faOutputCSSPath = path.resolve(__dirname, "build/css/fontawesome.min.css");
+const faInputCSSPath = path.resolve(__dirname, "assets/font-awesome-3.2.1/font-awesome.min.css");
+const faOutputCSSPath = path.resolve(__dirname, "build/css/font-awesome.min.css");
 
 // Ensure output directories exist
 fs.mkdirSync(path.dirname(faOutputCSSPath), { recursive: true });
@@ -73,14 +72,11 @@ fs.copyFile(faInputFontPath, faOutputFontPath, (err) => {
     console.log("Font file copied successfully to:", faOutputFontPath);
 });
 
-// Concatenate CSS files
-try {
-    const fontawesomeCSS = fs.readFileSync(faInputCSSPath, "utf8");
-    const regularCSS = fs.readFileSync(faFontFaceInputCSSPath, "utf8");
-    const concatenatedCSS = `${fontawesomeCSS}\n${regularCSS}`;
-
-    fs.writeFileSync(faOutputCSSPath, concatenatedCSS, "utf8");
-    console.log("Fontawesome CSS files concatenated successfully to:", faOutputCSSPath);
-} catch (err) {
-    console.error("Error concatenating css files:", err);
-}
+// Copy css file
+fs.copyFile(faInputCSSPath, faOutputCSSPath, (err) => {
+    if (err) {
+        console.error("Error copying css file:", err);
+        return;
+    }
+    console.log("Font css copied successfully to:", faOutputCSSPath);
+});
